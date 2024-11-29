@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/29 23:58:30 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/11/30 00:01:20 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ int	read_maps(void)
 	while (line)
 	{
 		line = get_next_line(fd);
-		check_line_char(line);
+		if (!check_line_char(line))
+			return (0);
 		ft_printf("test de lecture : %s\n", line);
 	}
 	//Peut-etre prevoir de malloc au fur et a mesure pendant la premiere verif!
+	//Creer une structure dediee pour la map
 	//ajouter la map dans un tableau (add_map)
 	//verifier que la configuartion dfe la maop est valide (check_config_map)
 	close(fd);
