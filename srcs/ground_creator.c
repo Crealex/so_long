@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   experience.c                                       :+:      :+:    :+:   */
+/*   ground_creator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 15:28:19 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/29 11:23:22 by atomasi          ###   ########.fr       */
+/*   Created: 2024/11/29 11:52:54 by atomasi           #+#    #+#             */
+/*   Updated: 2024/11/29 14:30:50 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int img_move(int x, int y, t_data *data)
+void	ground_creator(t_data *data)
 {
-	void *img;
-	char *relative_path = "./assets/pokeball.xpm";
+	char *path_ground;
+	int x;
+	int y;
 	int img_width;
-	int img_width2;
-	int img_height;
-	int img_height2;
+	int img_heigth;
 
-	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
-	img = mlx_xpm_file_to_image(data->mlx, relative_path, &img_width, &img_height);
-	mlx_put_image_to_window(data->mlx, data->window, img, x - (img_width / 2), y - (img_height / 2));
+	x = 0;
+	y = 0;
+	path_ground = "./assets/grass2.xpm";
+	data->img = mlx_xpm_file_to_image(data->mlx, path_ground, &img_width, &img_heigth);
+	if (!data->img)
+	{
+		ft_printf("error\n");
+		return ;
+	}
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_put_image_to_window(data->mlx, data->window, data->img, x, y);
+			x += img_width;
+		}
+		y += img_heigth;
+	}
 }
