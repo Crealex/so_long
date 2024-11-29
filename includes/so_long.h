@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/29 14:44:55 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/11/29 23:41:28 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "../minilibx_linux/mlx.h"
 # include "../libft/libft.h"
+# include <fcntl.h>
 
 # define WIDTH 1000
 # define HEIGHT 1000
@@ -30,6 +31,13 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct s_img {
+	void	*img;
+	int		width;
+	int		height;
+	char	*path;
+}				t_img;
+
 //hook
 int close_window(t_data *data);
 int mouse_press(int button, int x, int y, t_data *data);
@@ -41,5 +49,7 @@ int img_move(int x, int y, t_data *data);
 void	ground_creator(t_data *data);
 //wall_creator
 void	wall_creator(t_data *data);
+//read map
+int	read_maps(void);
 
 #endif

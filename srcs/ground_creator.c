@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:52:54 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/29 14:30:50 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/11/29 19:29:55 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ground_creator(t_data *data)
 
 	x = 0;
 	y = 0;
-	path_ground = "./assets/grass2.xpm";
+	path_ground = "./assets/grass.xpm";
 	data->img = mlx_xpm_file_to_image(data->mlx, path_ground, &img_width, &img_heigth);
 	if (!data->img)
 	{
