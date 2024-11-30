@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:54 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/29 19:43:27 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/11/30 16:15:18 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	wall_creator(t_data *data)
 	x = 0;
 	y = 0;
 	rock.path = "./assets/wall.xpm";
-	rock.img = mlx_xpm_file_to_image(data->mlx, rock.path, &rock.width, &rock.height);
+	data->img = mlx_xpm_file_to_image(data->mlx, rock.path, &img_width, &img_height);
 	if (!rock.img)
 	{
 		ft_printf("error\n");

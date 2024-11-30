@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/29 23:41:28 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/11/30 18:35:55 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ typedef struct s_img {
 	char	*path;
 }				t_img;
 
+typedef struct s_map {
+	char	**content;
+	char	*path;
+	int		height;
+	int		width;
+	int		player_x;
+	int		player_y;
+	int		collectibles;
+	int		count_out;
+	int		count_player;
+}				t_map;
+
 //hook
 int close_window(t_data *data);
 int mouse_press(int button, int x, int y, t_data *data);
@@ -51,5 +63,7 @@ void	ground_creator(t_data *data);
 void	wall_creator(t_data *data);
 //read map
 int	read_maps(void);
+// so_long_utils
+int	len_line(char *line);
 
 #endif
