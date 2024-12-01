@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/30 18:35:55 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/01 21:07:20 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ void	wall_creator(t_data *data);
 int	read_maps(void);
 // so_long_utils
 int	len_line(char *line);
+//testing.c
+void	just_testing(t_map	*map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/30 21:59:08 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/01 21:17:23 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,6 @@ int	file_to_map(t_map *map)
 	return (1);
 }
 
-void	just_testing(t_map	*map)
-{
-	int i;
-
-	i = 0;
-	while (map->content[i])
-	{
-		ft_printf("%s", map->content[i]);
-		i++;
-	}
-
-}
 int	char_check(char c, t_map *map)
 {
 	if (c == 'C')
@@ -90,7 +78,7 @@ int is_valid(t_map *map)
 		j = 0;
 		while (map->content[i][j])
 		{
-			if ((i == (map->height)|| i == 0))
+			if ((i == (map->height - 1) || i == 0))
 			{
 				if (map->content[i][j] != '1' && map->content[i][j] != '\n')
 					return (0);
@@ -120,13 +108,13 @@ int	read_maps(void)
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		map.width = ft_strlen(line);
 		if (!check_line_char(line))
 			return (0);
 		map.height++;
+		map.width = ft_strlen(line);
 	}
 	close(fd);
-	if (!file_to_map(&map) && line)
+	if (!file_to_map(&map))
 		return(0);
 	if (!is_valid(&map))
 		return (0);
