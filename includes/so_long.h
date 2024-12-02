@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/01 21:07:20 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:47:19 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define TILE_W 40
+# define TILE_H 40
 
 typedef struct	s_data {
 	void	*mlx;
@@ -50,6 +50,11 @@ typedef struct s_map {
 	int		count_player;
 }				t_map;
 
+typedef struct s_line {
+	char	*line;
+	int		no;
+}				t_line;
+
 //hook
 int close_window(t_data *data);
 int mouse_press(int button, int x, int y, t_data *data);
@@ -62,10 +67,12 @@ void	ground_creator(t_data *data);
 //wall_creator
 void	wall_creator(t_data *data);
 //read map
-int	read_maps(void);
+int	read_maps(t_map *map);
 // so_long_utils
 int	len_line(char *line);
 //testing.c
 void	just_testing(t_map	*map);
+//create_map
+int	create_map(t_map *map, t_data *data);
 
 #endif

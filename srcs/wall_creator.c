@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:54 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/30 16:15:18 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 10:10:54 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	wall_creator(t_data *data)
 {
-	int		x;
+	/* int		x;
 	int		y;
 	int		img_width;
 	int		img_height;
@@ -66,6 +66,6 @@ void	wall_creator(t_data *data)
 	{
 		mlx_put_image_to_window(data->mlx, data->window, data->img, x, y);
 		x += img_width;
-	}
+	} */
 
 }

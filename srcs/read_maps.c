@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/01 21:17:23 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 17:12:08 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 static int	check_line_char(char *line)
 {
-	int i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	while (line[i])
 	{
 		c = line[i];
-		if (c == '1' || c == '0' || c == 'P' || c == 'E' || c == 'C' || c == '\n')
+		if (c == '1' || c == '0' || c == 'P' || c == 'E' || c == 'C'
+			|| c == '\n')
 			i++;
 		else
 			return (0);
 	}
 	return (1);
 }
+
 int	file_to_map(t_map *map)
 {
-	char *line;
-	int fd;
-	int i;
+	char	*line;
+	int		fd;
+	int		i;
 
 	fd = open(map->path, O_RDONLY);
 	map->content = malloc(sizeof(char *) * (map->height + 1));
@@ -41,7 +43,7 @@ int	file_to_map(t_map *map)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		if (map->width != len_line(line))
 			return (0);
 		map->content[i] = ft_strdup(line);
@@ -60,27 +62,28 @@ int	char_check(char c, t_map *map)
 		map->count_out++;
 	if (c == 'P')
 		map->count_player++;
-	if (map->count_player > 1 || map->count_out > 1)
-		return (0);
 	return (1);
 }
 
-int is_valid(t_map *map)
+int	is_valid(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	map->count_out = 0;
 	map->count_player = 0;
+	map->collectibles = 0;
 	while (i < map->height)
 	{
 		j = 0;
 		while (map->content[i][j])
 		{
-			if ((i == (map->height - 1) || i == 0))
+			if ((i == (map->height - 1) || i == 0) || j == 0
+				|| j == (map->width - 1))
 			{
-				if (map->content[i][j] != '1' && map->content[i][j] != '\n')
+				if (map->content[i][j] != '1'
+					&& map->content[i][j] != '\n')
 					return (0);
 			}
 			if (!char_check(map->content[i][j], map))
@@ -89,34 +92,36 @@ int is_valid(t_map *map)
 		}
 		i++;
 	}
+	if (map->count_player != 1 || map->count_out != 1
+		|| map->collectibles < 1)
+		return (0);
 	return (1);
 }
 
-int	read_maps(void)
+int	read_maps(t_map *map)
 {
 	int		fd;
 	char	*line;
-	t_map	map;
 
-	map.path = "./maps/map.ber";
-	fd = open(map.path, O_RDONLY);
-	map.height = 0;
+	map->path = "./maps/map.ber";
+	fd = open(map->path, O_RDONLY);
+	map->height = 0;
 	if (!fd)
 		return (0);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		if (!check_line_char(line))
 			return (0);
-		map.height++;
-		map.width = ft_strlen(line);
+		map->height++;
+		map->width = ft_strlen(line);
 	}
 	close(fd);
-	if (!file_to_map(&map))
-		return(0);
-	if (!is_valid(&map))
+	if (!file_to_map(map))
+		return (0);
+	if (!is_valid(map))
 		return (0);
 	return (1);
 }

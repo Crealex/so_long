@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:35:49 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/30 12:35:02 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:57:58 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,22 @@
 int main()
 {
 	t_data	data;
-	char *img_path;
+	t_map	map;
 	int img_width;
 	int	img_height;
-	if (!read_maps())
+
+	if (!read_maps(&map))
 	{
 		ft_printf("Error with the map\n");
 		return (1);
 	}
-	img_path = "./assets/evoli2.xpm";
 	data.mlx = mlx_init();
-	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "so_long");
-	ground_creator(&data);
-	wall_creator(&data);
-	data.img = mlx_xpm_file_to_image(data.mlx, img_path, &img_width, &img_height);
-	mlx_put_image_to_window(data.mlx, data.window, data.img, 50, 50);
+	data.window = mlx_new_window(data.mlx, TILE_W * map.width, TILE_H * map.height, "so_long");
+	create_map(&map, &data);
+	//ground_creator(&data);
+	//wall_creator(&data);
+	//data.img = mlx_xpm_file_to_image(data.mlx, "./assets/evoli2.xpm", &img_width, &img_height);
+	//mlx_put_image_to_window(data.mlx, data.window, data.img, 50, 50);
 
 
 	//mlx_mouse_hide(data.mlx, data.window);

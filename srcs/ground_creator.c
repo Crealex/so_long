@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:52:54 by atomasi           #+#    #+#             */
-/*   Updated: 2024/11/29 19:29:55 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:46:34 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ground_creator(t_data *data)
 {
-	char *path_ground;
+	/* char *path_ground;
 	int x;
 	int y;
 	int img_width;
@@ -37,6 +37,6 @@ void	ground_creator(t_data *data)
 			mlx_put_image_to_window(data->mlx, data->window, data->img, x, y);
 			x += img_width;
 		}
-		y += img_heigth;
-	}
+		y += img_heigth; */
+	//}
 }
