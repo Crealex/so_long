@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/02 17:12:08 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 21:40:07 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,25 @@ int	file_to_map(t_map *map)
 	return (1);
 }
 
-int	char_check(char c, t_map *map)
+int	char_check(char c, t_map *map, int i, int j)
 {
 	if (c == 'C')
 		map->collectibles++;
 	if (c == 'E')
 		map->count_out++;
 	if (c == 'P')
+	{
 		map->count_player++;
+		map->player_x = j;
+		map->player_y = i;
+	}
+	if ((i == (map->height - 1) || i == 0) || j == 0
+		|| j == (map->width - 1))
+		{
+			if (map->content[i][j] != '1'
+				&& map->content[i][j] != '\n')
+				return (0);
+		}
 	return (1);
 }
 
@@ -79,14 +90,7 @@ int	is_valid(t_map *map)
 		j = 0;
 		while (map->content[i][j])
 		{
-			if ((i == (map->height - 1) || i == 0) || j == 0
-				|| j == (map->width - 1))
-			{
-				if (map->content[i][j] != '1'
-					&& map->content[i][j] != '\n')
-					return (0);
-			}
-			if (!char_check(map->content[i][j], map))
+			if (!char_check(map->content[i][j], map, i , j))
 				return (0);
 			j++;
 		}

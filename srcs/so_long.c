@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:35:49 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/02 13:57:58 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 22:29:44 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main()
 	}
 	data.mlx = mlx_init();
 	data.window = mlx_new_window(data.mlx, TILE_W * map.width, TILE_H * map.height, "so_long");
-	create_map(&map, &data);
+	draw_map(&map, &data);
 	//ground_creator(&data);
 	//wall_creator(&data);
 	//data.img = mlx_xpm_file_to_image(data.mlx, "./assets/evoli2.xpm", &img_width, &img_height);

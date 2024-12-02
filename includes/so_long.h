@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/02 13:47:19 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/02 22:34:22 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 
-# define TILE_W 40
-# define TILE_H 40
+# define TILE_W 32
+# define TILE_H 32
+
+typedef struct s_sprites {
+	void	*wall;
+	void	*ground;
+	void	*player;
+	void	*collect;
+	void	*exit;
+}				t_sprites;
 
 typedef struct	s_data {
 	void	*mlx;
@@ -29,6 +37,7 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	t_sprites	sprites;
 }				t_data;
 
 typedef struct s_img {
@@ -55,6 +64,7 @@ typedef struct s_line {
 	int		no;
 }				t_line;
 
+
 //hook
 int close_window(t_data *data);
 int mouse_press(int button, int x, int y, t_data *data);
@@ -73,6 +83,6 @@ int	len_line(char *line);
 //testing.c
 void	just_testing(t_map	*map);
 //create_map
-int	create_map(t_map *map, t_data *data);
+int	draw_map(t_map *map, t_data *data);
 
 #endif
