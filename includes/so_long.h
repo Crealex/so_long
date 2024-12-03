@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 17:24:30 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 21:47:16 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ void	free_map(t_map *map, int i);
 void	just_testing(t_map	*map);
 //create_map
 int	draw_map(t_map *map, t_data *data);
+int	draw_backround(t_data *data, t_line *line);
+void	place_items(t_data *data, t_line *line);
+//draw lvl2
+void	goto_lvl_two(t_game *game);
 //Move perso
 int	move(int keycode, t_game *game);
 

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:58:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 17:07:33 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:47:58 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_map	*map_copy(t_map *map)
 {
 	t_map *map_cpy;
 	int i;
-	map_cpy = malloc(sizeof(t_map));
+
+	map_cpy = malloc(sizeof(t_map) * 1);
 	if (!map_cpy)
 		return (NULL);
 	map_cpy->content = malloc(sizeof(char *) * (map->height + 1));
@@ -70,8 +71,9 @@ int	check_path(t_map *map)
 	map_cpy = map_copy(map);
 	if (!flood_fill(map_cpy, map_cpy->player_x, map_cpy->player_y))
 	{
-		ft_printf("chemin inaccessibl!\n");
+		ft_printf("chemin inaccessible !\n");
 		return (0);
 	}
+	free_map(map_cpy, map_cpy->height - 1);
 	return (1);
 }

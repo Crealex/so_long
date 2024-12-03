@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:11:25 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 17:43:16 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:36:58 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,21 @@ void	redraw_map(t_game *game, int new_x, int new_y, int keycode)
 
 void	check_exit(t_game *game, int new_x, int new_y)
 {
+	static int	lvl2_visisted = 0;
+
 	if (game->map->content[new_y][new_x] == 'E')
 	{
-		if (game->map->collectibles == 0)
-			ft_printf("map suivante\n");
-		else
+		if (game->map->collectibles == 0 && lvl2_visisted == 0)
+		{
+			lvl2_visisted = 1;
+			goto_lvl_two(game);
+		}
+		else if (game->map->collectibles != 0)
 			mlx_put_image_to_window(game->data->mlx, game->data->window,
 			game->data->sprites.exit_blocked, game->map->out_x * TILE_W,
 			game->map->out_y * TILE_H);
+		else if (game->map->collectibles == 0)
+			ft_printf("image final\n");
 	}
 	else if (game->map->collectibles == 0)
 		mlx_put_image_to_window(game->data->mlx, game->data->window,

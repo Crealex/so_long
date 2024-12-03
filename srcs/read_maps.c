@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 17:10:16 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:10:42 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	file_to_map(t_map *map)
 	int		fd;
 	int		i;
 
-	fd = open("./maps/map.ber", O_RDONLY);
+	fd = open(map->path, O_RDONLY);
 	map->content = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->content)
 		return (0);
@@ -53,6 +53,7 @@ int	file_to_map(t_map *map)
 	}
 	i++;
 	map->content[i] = NULL;
+	close(fd);
 	return (1);
 }
 
@@ -60,7 +61,6 @@ int	char_check(char c, t_map *map, int i, int j)
 {
 	if (c == 'C')
 		map->collectibles++;
-	ft_printf("%d\n", map->collectibles);
 	if (c == 'E')
 	{
 		map->count_out++;
@@ -114,7 +114,7 @@ int	read_maps(t_map *map)
 	int		fd;
 	char	*line;
 
-	fd = open("./maps/map.ber", O_RDONLY);
+	fd = open(map->path, O_RDONLY);
 	if (!fd)
 		return (0);
 	map->height = 0;

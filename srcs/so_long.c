@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:35:49 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 16:10:10 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 21:29:44 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main()
 	t_game	game;
 	//int img_width;
 	//int	img_height;
-
+	map.path = "./maps/map.ber";
 	if (!read_maps(&map))
 	{
 		ft_printf("Error with the map\n");
