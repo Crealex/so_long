@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/02 22:34:22 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 11:36:21 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ void	ground_creator(t_data *data);
 void	wall_creator(t_data *data);
 //read map
 int	read_maps(t_map *map);
+//check path
+int	check_path(t_map *map);
 // so_long_utils
 int	len_line(char *line);
+void	free_map(t_map *map, int i);
 //testing.c
 void	just_testing(t_map	*map);
 //create_map
