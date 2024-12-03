@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 11:46:05 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:58:22 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ int	file_to_map(t_map *map)
 	int		fd;
 	int		i;
 
-	fd = open(map->path, O_RDONLY);
+	fd = open("./maps/map.ber", O_RDONLY);
 	map->content = malloc(sizeof(char *) * (map->height + 1));
+	if (!map->content)
+		return (0);
 	i = 0;
 	while (i <= map->height)
 	{
@@ -88,7 +90,6 @@ int	is_valid(t_map *map)
 	while (i < map->height)
 	{
 		j = 0;
-		ft_printf("test : %c\n", map->content[i][j]); // impossible d'y acceder ???????????
 		while (map->content[i][j])
 		{
 			if (!char_check(map->content[i][j], map, i , j))
@@ -127,7 +128,7 @@ int	read_maps(t_map *map)
 		return (0);
 	if (!is_valid(map))
 		return (0);
-	if (!check_path(map))
+	 if (!check_path(map))
 		return (0);
 	return (1);
 }

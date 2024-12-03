@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:58:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 11:39:09 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 15:10:34 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ t_map	*map_copy(t_map *map)
 	map_cpy->collectibles = map->collectibles;
 	map_cpy->height = map->height;
 	map_cpy->width = map->width;
-	map->count_out = map->count_out;
+	map_cpy->count_out = map->count_out;
 	map_cpy->player_x = map->player_x;
 	map_cpy->player_y = map->player_y;
 	return (map_cpy);
 }
 
-flood_fill(t_map *map, int x, int y)
+int	flood_fill(t_map *map, int x, int y)
 {
 	if  (map->content[y][x] == '1' || map->content[y][x] == 'V')
 		return ;
@@ -53,6 +53,9 @@ flood_fill(t_map *map, int x, int y)
 	flood_fill(map, x - 1, y);
 	flood_fill(map, x, y + 1);
 	flood_fill(map, x, y - 1);
+	if (map->collectibles != 0 || map->count_out != 0)
+		return (0);
+	return (1);
 }
 
 int	check_path(t_map *map)
@@ -63,10 +66,11 @@ int	check_path(t_map *map)
 
 	i = 0;
 	j = 0;
-	ft_printf("test\n");
 	map_cpy = map_copy(map);
-	flood_fill(map_cpy, map_cpy->player_x, map_cpy->player_y);
-	if (map_cpy->collectibles != 0 || map_cpy->count_out != 0)
+	if (!flood_fill(map_cpy, map_cpy->player_x, map_cpy->player_y))
+	{
+		ft_printf("chemin inaccessibl!\n");
 		return (0);
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 11:36:21 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 16:06:25 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ typedef struct s_line {
 	int		no;
 }				t_line;
 
+typedef struct s_game {
+	t_data	*data;
+	t_map	*map;
+}				t_game;
 
 //hook
 int close_window(t_data *data);
@@ -87,5 +91,7 @@ void	free_map(t_map *map, int i);
 void	just_testing(t_map	*map);
 //create_map
 int	draw_map(t_map *map, t_data *data);
+//Move perso
+int	move(int keycode, t_game *game);
 
 #endif
