@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:28:02 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 16:07:00 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 17:27:09 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	place_items(t_data *data, t_line *line)
 			mlx_put_image_to_window(data->mlx, data->window,
 			data->sprites.collect, (j * TILE_W), (line->no * TILE_H));
 		else if (line->line[j] == 'E')
-			mlx_put_image_to_window(data->mlx, data->window, data->sprites.exit,
+			mlx_put_image_to_window(data->mlx, data->window, data->sprites.exit_blocked,
 				(j * TILE_W), (line->no * TILE_H));
 		else if (line->line[j] == 'P')
 			mlx_put_image_to_window(data->mlx, data->window,
-				data->sprites.player, (j * TILE_W), (line->no * TILE_H));
+				data->sprites.player_r, (j * TILE_W), (line->no * TILE_H));
 		j++;
 	}
 }
@@ -60,16 +60,21 @@ int	init_sprites(t_data *data)
 		"./assets/32px/wall32.xpm", &width, &height);
 	data->sprites.ground = mlx_xpm_file_to_image(data->mlx,
 		"./assets/32px/grass32.xpm", &width, &height);
-    data->sprites.player = mlx_xpm_file_to_image(data->mlx,
+	data->sprites.player_r = mlx_xpm_file_to_image(data->mlx,
 		"./assets/32px/evoli_r.xpm", &width, &height);
+	data->sprites.player_l = mlx_xpm_file_to_image(data->mlx,
+		"./assets/32px/evoli_l.xpm", &width, &height);
 	data->sprites.collect = mlx_xpm_file_to_image(data->mlx,
 		"./assets/32px/collect32.xpm", &width, &height);
 	data->sprites.exit = mlx_xpm_file_to_image(data->mlx,
 		"./assets/32px/exit32.xpm", &width, &height);
+	data->sprites.exit_blocked = mlx_xpm_file_to_image(data->mlx,
+		"./assets/32px/blocked_out32.xpm", &width, &height);
 
     // Vérification que toutes les images sont bien chargées
-	if (!data->sprites.wall || !data->sprites.ground || !data->sprites.player
-		|| !data->sprites.collect|| !data->sprites.exit)
+	if (!data->sprites.wall || !data->sprites.ground || !data->sprites.player_r
+		|| !data->sprites.collect || !data->sprites.exit
+		|| !data->sprites.exit_blocked || !data->sprites.player_l)
 		return (0);
 	return (1);
 }
@@ -93,7 +98,7 @@ int	draw_map(t_map *map, t_data *data)
 	mlx_destroy_image(data->mlx, data->sprites.wall);
 	//mlx_destroy_image(data->mlx, data->sprites.ground);
 	//mlx_destroy_image(data->mlx, data->sprites.player);
-	mlx_destroy_image(data->mlx, data->sprites.exit);
+	//mlx_destroy_image(data->mlx, data->sprites.exit);
 	mlx_destroy_image(data->mlx, data->sprites.collect);
 
 	return (1);

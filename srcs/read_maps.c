@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 14:58:22 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 17:10:16 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,13 @@ int	char_check(char c, t_map *map, int i, int j)
 {
 	if (c == 'C')
 		map->collectibles++;
+	ft_printf("%d\n", map->collectibles);
 	if (c == 'E')
+	{
 		map->count_out++;
+		map->out_x = j;
+		map->out_y = i;
+	}
 	if (c == 'P')
 	{
 		map->count_player++;

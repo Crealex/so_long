@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 16:06:25 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/03 17:24:30 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 typedef struct s_sprites {
 	void	*wall;
 	void	*ground;
-	void	*player;
+	void	*player_r;
+	void	*player_l;
 	void	*collect;
 	void	*exit;
+	void	*exit_blocked;
 }				t_sprites;
 
 typedef struct	s_data {
@@ -54,6 +56,8 @@ typedef struct s_map {
 	int		width;
 	int		player_x;
 	int		player_y;
+	int		out_x;
+	int		out_y;
 	int		collectibles;
 	int		count_out;
 	int		count_player;
