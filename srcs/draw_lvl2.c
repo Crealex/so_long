@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 21:16:02 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 15:32:59 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/04 22:20:50 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ void cleanup_level(t_game *game)
 		// Destruction de la fenêtre
 		if (game->data->window)
 			mlx_destroy_window(game->data->mlx, game->data->window);
+		if (game->data->mlx)
+        {
+            mlx_destroy_display(game->data->mlx);  // Sur Linux seulement
+            free(game->data->mlx);
+            game->data->mlx = NULL;  // Important de mettre le pointeur à NULL
+		}
 	}
 }
 
@@ -96,7 +102,7 @@ void	goto_lvl_two(t_game *game)
 {
 
 	cleanup_level(game);
-	mlx_loop_end(game->data->mlx);
+	//mlx_loop_end(game->data->mlx);
 	game->map = malloc(sizeof(t_map));
 	game->data = malloc(sizeof(t_data));
 	game->map->path = "./maps/lvl2.ber";
@@ -113,30 +119,3 @@ void	goto_lvl_two(t_game *game)
 	mlx_hook(game->data->window, 17, 1L<<17, close_window, game->data);
 	mlx_loop(game->data->mlx);
 }
-/* game->map->path = "./maps/lvl2.ber";
-	if (!read_maps(game->map))
-	{
-		ft_printf("Erreur lecture map lvl 2\n");
-		return ;
-	}
-	game->data->mlx = mlx_init();
-	game->data->window = mlx_new_window(game->data->mlx, TILE_W * game->map->width, TILE_H * game->map->height, "so_long : the cave");
-	draw_map_lvl2(game->map, game->data);
-	mlx_hook(game->data->window, 2, 1L<<0, move, &game);
-	mlx_loop(game->data->mlx); */
-
-	/* map2.path = "./maps/lvl2.ber";
-	if (!read_maps(&map2))
-	{
-		ft_printf("Erreur lecture map lvl 2\n");
-		return ;
-	}
-	game2.data = &data2;
-	game2.map = &map2;
-	data2.mlx = mlx_init();
-	data2.window = mlx_new_window(data2.mlx, TILE_W * map2.width, TILE_H * map2.height, "so_long : the cave");
-	draw_map_lvl2(&map2, &data2);
-	ft_printf("test\n");
-	mlx_hook(data2.window, 2, 1L<<0, move, &game2);
-	mlx_hook(data2.window, 17, 1L<<17, close_window, &data2);
-	mlx_loop(data2.mlx); */

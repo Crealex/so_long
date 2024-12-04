@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 15:32:17 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/04 21:52:52 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int close_window(t_data *data);
 int mouse_press(int button, int x, int y, t_data *data);
 int mouse_move(int x, int y, t_data *data);
 int key_press(int keycode, t_data *data);
+int	close_key_press(int keycode, t_data *data);
 // experience
 int img_move(int x, int y, t_data *data);
 //ground_creator
@@ -108,8 +109,12 @@ int	draw_backround(t_data *data, t_line *line);
 void	place_items(t_data *data, t_line *line);
 //draw lvl2
 void	goto_lvl_two(t_game *game);
-void	cleanup_level(t_game *game)
+void	cleanup_level(t_game *game);
 //Move perso
 int	move(int keycode, t_game *game);
+// finish display
+void	finish_display(t_game *game);
+// custom path
+void	custom_path(char *path);
 
 #endif

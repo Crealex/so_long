@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:11:25 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 15:02:50 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/04 22:27:44 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	redraw_map(t_game *game, int new_x, int new_y, int keycode)
 		ft_printf("move %d\n", count);
 		mlx_put_image_to_window(game->data->mlx, game->data->window,
 			game->data->sprites.ground, game->map->player_x * TILE_W, game->map->player_y * TILE_H);
+		//creer une fonction :
+		// creer un rectangle noir en haut a droite
+		// itoa sur count
+		// affiche le nombre de move a l'interieur avec la fonction ci dessous :
+		mlx_string_put(game->data->mlx, game->data->window,20, 20, 0x00FFFFFF, "move :");
 	}
 	game->map->player_x = new_x;
 	game->map->player_y = new_y;
@@ -55,6 +60,7 @@ void	check_exit(t_game *game, int new_x, int new_y)
 		else if (game->map->collectibles == 0)
 		{
 			//creer image de fin
+			finish_display(game);
 			ft_printf("FINNNIIIIIIIII\n");
 		}
 	}
