@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:58:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 22:47:58 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/04 10:12:00 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ t_map	*map_copy(t_map *map)
 	int i;
 
 	map_cpy = malloc(sizeof(t_map) * 1);
+	ft_printf("test\n");
 	if (!map_cpy)
 		return (NULL);
 	map_cpy->content = malloc(sizeof(char *) * (map->height + 1));
 	if (!map_cpy->content)
 		return (free(map_cpy), NULL);
 	i = 0;
-	while (map->content[i])
+	ft_printf("hauteur de la map : %d\n", map->height);
+	while (i < map->height)
 	{
 		map_cpy->content[i] = ft_strdup(map->content[i]);
 		if (!map_cpy->content[i])
@@ -43,18 +45,21 @@ t_map	*map_copy(t_map *map)
 
 int	flood_fill(t_map *map, int x, int y)
 {
-	if  (map->content[y][x] == '1' || map->content[y][x] == 'V')
-		return ;
+	if (map->content[y][x] == 'E')
+	{
+		map->content[y][x] = 'V';
+		map->count_out--;
+	}
+	if  (map->content[y][x] == '1' || map->content[y][x] == 'V' || map->content[y][x] == 'E')
+		return (0);
 	if (map->content[y][x] == 'C')
 		map->collectibles--;
-	if (map->content[y][x] == 'E')
-		map->count_out--;
 	map->content[y][x] = 'V';
 	flood_fill(map, x + 1, y);
 	flood_fill(map, x - 1, y);
 	flood_fill(map, x, y + 1);
 	flood_fill(map, x, y - 1);
-	//ft_printf("collect %d, out : %d\n", map->collectibles, map->count_out);
+	ft_printf("collect %d, out : %d\n", map->collectibles, map->count_out);
 	if (map->collectibles != 0 || map->count_out != 0)
 		return (0);
 	return (1);
@@ -62,13 +67,15 @@ int	flood_fill(t_map *map, int x, int y)
 
 int	check_path(t_map *map)
 {
-	int i;
-	int j;
+	//int i;
+	//int j;
 	t_map	*map_cpy;
 
-	i = 0;
-	j = 0;
+	//i = 0;
+	//j = 0;
 	map_cpy = map_copy(map);
+	if (!map_cpy)
+		return (0);
 	if (!flood_fill(map_cpy, map_cpy->player_x, map_cpy->player_y))
 	{
 		ft_printf("chemin inaccessible !\n");

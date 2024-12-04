@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 22:10:42 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/04 14:26:27 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ int	file_to_map(t_map *map)
 	int		i;
 
 	fd = open(map->path, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	map->content = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->content)
 		return (0);
 	i = 0;
-	while (i <= map->height)
+	while (i < map->height)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -70,6 +72,7 @@ int	char_check(char c, t_map *map, int i, int j)
 	if (c == 'P')
 	{
 		map->count_player++;
+		ft_printf("player x : %d, y : %d", j, i);
 		map->player_x = j;
 		map->player_y = i;
 	}
@@ -120,6 +123,8 @@ int	read_maps(t_map *map)
 	map->height = 0;
 	while (1)
 	{
+		/* if (line)
+			free(line) */;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
@@ -137,3 +142,28 @@ int	read_maps(t_map *map)
 		return (0);
 	return (1);
 }
+	/* int		fd;
+	char	*line;
+
+	fd = open(map->path, O_RDONLY);
+	if (!fd)
+		return (0);
+	map->height = 0;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		if (!check_line_char(line))
+			return (0);
+		map->height++;
+		map->width = ft_strlen(line);
+	}
+	close(fd);
+	if (!file_to_map(map))
+		return (0);
+	if (!is_valid(map))
+		return (0);
+	 if (!check_path(map))
+		return (0);
+	return (1); */

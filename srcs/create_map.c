@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:28:02 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 17:27:09 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/04 14:22:16 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ int	draw_map(t_map *map, t_data *data)
 		place_items(data, &line);
 		i++;
 	}
-	mlx_destroy_image(data->mlx, data->sprites.wall);
+	//mlx_destroy_image(data->mlx, data->sprites.wall);
 	//mlx_destroy_image(data->mlx, data->sprites.ground);
 	//mlx_destroy_image(data->mlx, data->sprites.player);
 	//mlx_destroy_image(data->mlx, data->sprites.exit);
-	mlx_destroy_image(data->mlx, data->sprites.collect);
+	//mlx_destroy_image(data->mlx, data->sprites.collect);
 
 	return (1);
 }

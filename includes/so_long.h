@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/03 21:47:16 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/04 15:32:17 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 
 # define TILE_W 32
 # define TILE_H 32
+// COLOR
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define PURPLE "\033[0;35m"
+# define CYAN "\033[0;36m"
+# define BOLD "\033[1m"
+# define END "\033[0m"
 
 typedef struct s_sprites {
 	void	*wall;
@@ -99,6 +108,7 @@ int	draw_backround(t_data *data, t_line *line);
 void	place_items(t_data *data, t_line *line);
 //draw lvl2
 void	goto_lvl_two(t_game *game);
+void	cleanup_level(t_game *game)
 //Move perso
 int	move(int keycode, t_game *game);
 
