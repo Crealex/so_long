@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 21:16:02 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 22:20:50 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:39:16 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,6 @@ int	draw_map_lvl2(t_map *map, t_data *data)
 		place_items(data, &line);
 		i++;
 	}
-	//mlx_destroy_image(data->mlx, data->sprites.wall);
-	//mlx_destroy_image(data->mlx, data->sprites.ground);
-	//mlx_destroy_image(data->mlx, data->sprites.player);
-	//mlx_destroy_image(data->mlx, data->sprites.exit);
-	//mlx_destroy_image(data->mlx, data->sprites.collect);
-
 	return (1);
 }
 
@@ -71,6 +65,7 @@ void cleanup_level(t_game *game)
 	// Destruction des images du niveau précédent
 	if (game->data)
 	{
+		free_enemies(game->data);
 		if (game->data->sprites.ground)
 			mlx_destroy_image(game->data->mlx, game->data->sprites.ground);
 		if (game->data->sprites.wall)
@@ -102,9 +97,10 @@ void	goto_lvl_two(t_game *game)
 {
 
 	cleanup_level(game);
-	//mlx_loop_end(game->data->mlx);
+	//mlx_loop_end(game->data);
 	game->map = malloc(sizeof(t_map));
 	game->data = malloc(sizeof(t_data));
+	game->data->enemies = NULL;
 	game->map->path = "./maps/lvl2.ber";
 	if (!read_maps(game->map))
 	{
@@ -117,5 +113,6 @@ void	goto_lvl_two(t_game *game)
 	draw_map_lvl2(game->map, game->data);
 	mlx_hook(game->data->window, 2, 1L<<0, move, game);
 	mlx_hook(game->data->window, 17, 1L<<17, close_window, game->data);
+	mlx_loop_hook(game->data->mlx, update_animation, game->data);
 	mlx_loop(game->data->mlx);
 }

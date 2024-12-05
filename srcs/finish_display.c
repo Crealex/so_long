@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:27:27 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 16:26:04 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 20:44:46 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	gameover_display(t_game *game)
 	game->data->mlx = mlx_init();
 	 if (!game->data->mlx)
         return;
-	game->data->window = mlx_new_window(game->data->mlx, 1024,
-		1024, "so_long : game over");
+	game->data->window = mlx_new_window(game->data->mlx, 1080,
+		1080, "so_long : game over");
 	 if (!game->data->window)
 		return;
 	img = mlx_xpm_file_to_image(game->data->mlx,

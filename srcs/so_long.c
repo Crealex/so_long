@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:35:49 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 16:36:45 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 18:42:45 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	default_path(void)
 	mlx_hook(data.window, 2, 1L<<0, key_press, &data);
 	mlx_hook(data.window, 2, 1L<<0, move, &game);
 	mlx_hook(data.window, 17, 1L<<17, close_window, &data);
-	mlx_loop_hook(data.window, update_animation, &data);
+	mlx_loop_hook(data.mlx, update_animation, &data);
 	mlx_loop(data.mlx);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 16:30:35 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:17:12 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_enemy {
 	int		y;
 }				t_enemy;
 
+typedef struct s_enemies
+{
+	t_enemy **enemies;
+	int count;
+	int capacity;
+}				t_enemies;
+
 typedef struct	s_data {
 	void	*mlx;
 	void	*window;
@@ -59,6 +66,7 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 	t_sprites	sprites;
+	t_enemies	*enemies;
 }				t_data;
 
 typedef struct s_img {
@@ -80,7 +88,6 @@ typedef struct s_map {
 	int		collectibles;
 	int		count_out;
 	int		count_player;
-	t_enemy	*enemies;
 	int		enemy_count;
 	int		frame_counter;
 }				t_map;
@@ -132,7 +139,8 @@ void	gameover_display(t_game *game);
 // custom path
 void	custom_path(char *path);
 // enemy
-int	update_animation(t_game *game);
+int	update_animation(t_data *data);
 void	draw_enemy(t_data *data, int y, int x);
+void free_enemies(t_data *data);
 
 #endif

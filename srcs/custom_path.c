@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 21:17:56 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 10:44:50 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:58:34 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	redraw_map_cp(t_game *game, int new_x, int new_y, int keycode)
 
 void	check_exit_cp(t_game *game, int new_x, int new_y)
 {
+	if ((game->map->content[new_y][new_x] == 'X'))
+		gameover_display(game);
 	if (game->map->content[new_y][new_x] == 'E')
 	{
 		if (game->map->collectibles == 0)
@@ -99,7 +101,7 @@ void	custom_path(char *path)
 		if (!read_maps(&map))
 		{
 			ft_printf("Error with the map\n");
-			return (1);
+			return ;
 		}
 		data.mlx = mlx_init();
 		data.window = mlx_new_window(data.mlx, TILE_W * map.width, TILE_H * map.height, "so_long");
@@ -109,5 +111,6 @@ void	custom_path(char *path)
 		mlx_hook(data.window, 2, 1L<<0, key_press, &data);
 		mlx_hook(data.window, 2, 1L<<0, move_cp, &game);
 		mlx_hook(data.window, 17, 1L<<17, close_window, &data);
+		mlx_loop_hook(data.mlx, update_animation, &data);
 		mlx_loop(data.mlx);
 }

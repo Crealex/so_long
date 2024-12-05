@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:58:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 16:28:47 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:10:43 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	flood_fill(t_map *map, int x, int y)
 		map->count_out--;
 	}
 	if  (map->content[y][x] == '1' || map->content[y][x] == 'V' || map->content[y][x] == 'E'
-			||map->content == 'X')
+			||map->content[y][x] == 'X')
 		return (0);
 	if (map->content[y][x] == 'C')
 		map->collectibles--;
