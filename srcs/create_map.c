@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:28:02 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 14:22:16 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 13:59:37 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	place_items(t_data *data, t_line *line)
 		else if (line->line[j] == 'P')
 			mlx_put_image_to_window(data->mlx, data->window,
 				data->sprites.player_r, (j * TILE_W), (line->no * TILE_H));
+		else if (line->line[j] == 'X')
+			draw_enemy(data, j, line);
 		j++;
 	}
 }
@@ -95,11 +97,5 @@ int	draw_map(t_map *map, t_data *data)
 		place_items(data, &line);
 		i++;
 	}
-	//mlx_destroy_image(data->mlx, data->sprites.wall);
-	//mlx_destroy_image(data->mlx, data->sprites.ground);
-	//mlx_destroy_image(data->mlx, data->sprites.player);
-	//mlx_destroy_image(data->mlx, data->sprites.exit);
-	//mlx_destroy_image(data->mlx, data->sprites.collect);
-
 	return (1);
 }

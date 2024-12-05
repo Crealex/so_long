@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 14:26:27 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 13:42:54 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_line_char(char *line)
 	{
 		c = line[i];
 		if (c == '1' || c == '0' || c == 'P' || c == 'E' || c == 'C'
-			|| c == '\n')
+			|| c == '\n' || 'X')
 			i++;
 		else
 			return (0);
@@ -72,10 +72,11 @@ int	char_check(char c, t_map *map, int i, int j)
 	if (c == 'P')
 	{
 		map->count_player++;
-		ft_printf("player x : %d, y : %d", j, i);
 		map->player_x = j;
 		map->player_y = i;
 	}
+	if (c == 'X')
+		map->enemy_count++;
 	if ((i == (map->height - 1) || i == 0) || j == 0
 		|| j == (map->width - 1))
 		{
@@ -95,6 +96,7 @@ int	is_valid(t_map *map)
 	map->count_out = 0;
 	map->count_player = 0;
 	map->collectibles = 0;
+	map->enemy_count = 0;
 	while (i < map->height)
 	{
 		j = 0;

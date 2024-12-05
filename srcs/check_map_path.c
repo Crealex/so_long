@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:58:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 10:12:00 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 16:28:47 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	flood_fill(t_map *map, int x, int y)
 		map->content[y][x] = 'V';
 		map->count_out--;
 	}
-	if  (map->content[y][x] == '1' || map->content[y][x] == 'V' || map->content[y][x] == 'E')
+	if  (map->content[y][x] == '1' || map->content[y][x] == 'V' || map->content[y][x] == 'E'
+			||map->content == 'X')
 		return (0);
 	if (map->content[y][x] == 'C')
 		map->collectibles--;
@@ -59,7 +60,6 @@ int	flood_fill(t_map *map, int x, int y)
 	flood_fill(map, x - 1, y);
 	flood_fill(map, x, y + 1);
 	flood_fill(map, x, y - 1);
-	ft_printf("collect %d, out : %d\n", map->collectibles, map->count_out);
 	if (map->collectibles != 0 || map->count_out != 0)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 11:52:14 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 16:30:35 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ typedef struct s_sprites {
 	void	*exit;
 	void	*exit_blocked;
 }				t_sprites;
+
+typedef struct s_enemy {
+	void	*sprites[10];
+	int		current_frame;
+	int		frame_count;
+	int		frame_delay;
+	int		frame_timer;
+	int		x;
+	int		y;
+}				t_enemy;
 
 typedef struct	s_data {
 	void	*mlx;
@@ -85,16 +95,6 @@ typedef struct s_game {
 	t_map	*map;
 }				t_game;
 
-typedef struct s_enemy {
-	void	*sprites[10];
-	int		current_frame;
-	int		frame_count;
-	int		frame_delay;
-	int		frame_timer;
-	int		x;
-	int		y;
-}				t_enemy;
-
 //hook
 int close_window(t_data *data);
 int mouse_press(int button, int x, int y, t_data *data);
@@ -128,7 +128,11 @@ void	cleanup_level(t_game *game);
 int	move(int keycode, t_game *game);
 // finish display
 void	finish_display(t_game *game);
+void	gameover_display(t_game *game);
 // custom path
 void	custom_path(char *path);
+// enemy
+int	update_animation(t_game *game);
+void	draw_enemy(t_data *data, int y, int x);
 
 #endif

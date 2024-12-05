@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:11:25 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 10:43:42 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 14:16:10 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	check_exit(t_game *game, int new_x, int new_y)
 {
 	static int	lvl2_visisted = 0;
 
+	if ((game->map->content[new_y][new_x] == 'X'))
+		gameover_display(game);
 	if (game->map->content[new_y][new_x] == 'E')
 	{
 		if (game->map->collectibles == 0 && lvl2_visisted == 0)
@@ -82,7 +84,6 @@ void	check_exit(t_game *game, int new_x, int new_y)
 			game->map->out_y * TILE_H);
 		else if (game->map->collectibles == 0)
 		{
-			//creer image de fin
 			finish_display(game);
 			return ;
 		}
@@ -100,7 +101,6 @@ int	move(int keycode, t_game *game)
 
 	new_x = game->map->player_x;
 	new_y = game->map->player_y;
-	//ft_printf("player x : %d, player y %d\n", game->map->player_x, game->map->player_y);
 	if (keycode == 119) //w
 		new_y = game->map->player_y - 1;
 	else if (keycode == 115) //s
