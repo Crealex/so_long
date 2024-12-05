@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 21:17:56 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 21:26:03 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 10:44:50 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	redraw_map_cp(t_game *game, int new_x, int new_y, int keycode)
 	if (keycode == 100 || keycode == 115 || keycode == 119 || keycode == 97)
 	{
 		count++;
-		ft_printf("move %d\n", count);
 		mlx_put_image_to_window(game->data->mlx, game->data->window,
 			game->data->sprites.ground, game->map->player_x * TILE_W, game->map->player_y * TILE_H);
 	}
@@ -44,7 +43,6 @@ void	check_exit_cp(t_game *game, int new_x, int new_y)
 		if (game->map->collectibles == 0)
 		{
 			finish_display(game);
-			ft_printf("FINNNIIIIIIIII\n");
 		}
 		else if (game->map->collectibles != 0)
 			mlx_put_image_to_window(game->data->mlx, game->data->window,

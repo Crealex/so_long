@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 21:52:52 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 11:52:14 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef struct s_map {
 	int		collectibles;
 	int		count_out;
 	int		count_player;
+	t_enemy	*enemies;
+	int		enemy_count;
+	int		frame_counter;
 }				t_map;
 
 typedef struct s_line {
@@ -81,6 +84,16 @@ typedef struct s_game {
 	t_data	*data;
 	t_map	*map;
 }				t_game;
+
+typedef struct s_enemy {
+	void	*sprites[10];
+	int		current_frame;
+	int		frame_count;
+	int		frame_delay;
+	int		frame_timer;
+	int		x;
+	int		y;
+}				t_enemy;
 
 //hook
 int close_window(t_data *data);
@@ -101,6 +114,7 @@ int	check_path(t_map *map);
 // so_long_utils
 int	len_line(char *line);
 void	free_map(t_map *map, int i);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //testing.c
 void	just_testing(t_map	*map);
 //create_map

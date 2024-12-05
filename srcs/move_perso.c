@@ -6,11 +6,38 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:11:25 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 22:27:44 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/05 10:43:42 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	draw_counter(t_game *game, int count)
+{
+	int		y;
+	int		x;
+	char	*str_count;
+
+	y = 0;
+	x = 20;
+	str_count = ft_itoa(count);
+	game->data->img = mlx_new_image(game->data->mlx, 90, 15);
+	game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel,
+		&game->data->line_length, &game->data->endian);
+	while (y < 15)
+	{
+		y++;
+		x = 20;
+		while (x < 70)
+		{
+			my_mlx_pixel_put(game->data, x, y, 0x00000000);
+			x++;
+		}
+	}
+	mlx_put_image_to_window(game->data->mlx, game->data->window, game->data->img, 0, 0);
+	mlx_string_put(game->data->mlx, game->data->window,10, 10, 0xFF0000, "move : ");
+	mlx_string_put(game->data->mlx, game->data->window,50, 10, 0xFF0000, str_count);
+}
 
 void	redraw_map(t_game *game, int new_x, int new_y, int keycode)
 {
@@ -23,14 +50,10 @@ void	redraw_map(t_game *game, int new_x, int new_y, int keycode)
 	if (keycode == 100 || keycode == 115 || keycode == 119 || keycode == 97)
 	{
 		count++;
-		ft_printf("move %d\n", count);
 		mlx_put_image_to_window(game->data->mlx, game->data->window,
 			game->data->sprites.ground, game->map->player_x * TILE_W, game->map->player_y * TILE_H);
-		//creer une fonction :
-		// creer un rectangle noir en haut a droite
-		// itoa sur count
-		// affiche le nombre de move a l'interieur avec la fonction ci dessous :
-		mlx_string_put(game->data->mlx, game->data->window,20, 20, 0x00FFFFFF, "move :");
+		draw_counter(game, count);
+		ft_printf("move %d\n", count);
 	}
 	game->map->player_x = new_x;
 	game->map->player_y = new_y;
@@ -61,7 +84,7 @@ void	check_exit(t_game *game, int new_x, int new_y)
 		{
 			//creer image de fin
 			finish_display(game);
-			ft_printf("FINNNIIIIIIIII\n");
+			return ;
 		}
 	}
 	else if (game->map->collectibles == 0)
