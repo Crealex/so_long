@@ -1,8 +1,7 @@
 NAME	=	so_long
 LIBFT	=	libft/libft.a
-SRCS	=	$(addprefix srcs/, so_long.c hook.c experience.c ground_creator.c wall_creator.c \
-								read_maps.c so_long_utils.c testing.c create_map.c check_map_path.c \
-								move_perso.c draw_lvl2.c finish_display.c custom_path.c enemy.c)
+SRCS	=	$(addprefix srcs/, so_long.c hook.c read_maps.c so_long_utils.c testing.c create_map.c check_map_path.c \
+								move_perso.c draw_lvl2.c finish_display.c custom_path.c enemy.c draw_counter.c)
 OBJS	=	${SRCS:%.c=${OBJDIR}/%.o}
 CC		=	gcc
 CFLAGS	=	-Wextra -Wall #-Werror

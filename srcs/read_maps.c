@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:20:20 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 13:42:54 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:11:07 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	file_to_map(t_map *map)
 	fd = open(map->path, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	map->content = malloc(sizeof(char *) * (map->height + 1));
+	map->content = ft_calloc(sizeof(char *), (map->height + 1));
 	if (!map->content)
 		return (0);
 	i = 0;
@@ -52,8 +52,8 @@ int	file_to_map(t_map *map)
 			return (0);
 		map->content[i] = ft_strdup(line);
 		i++;
+		free(line);
 	}
-	i++;
 	map->content[i] = NULL;
 	close(fd);
 	return (1);
@@ -79,11 +79,11 @@ int	char_check(char c, t_map *map, int i, int j)
 		map->enemy_count++;
 	if ((i == (map->height - 1) || i == 0) || j == 0
 		|| j == (map->width - 1))
-		{
-			if (map->content[i][j] != '1'
-				&& map->content[i][j] != '\n')
-				return (0);
-		}
+	{
+		if (map->content[i][j] != '1'
+			&& map->content[i][j] != '\n')
+			return (0);
+	}
 	return (1);
 }
 
@@ -102,7 +102,7 @@ int	is_valid(t_map *map)
 		j = 0;
 		while (map->content[i][j])
 		{
-			if (!char_check(map->content[i][j], map, i , j))
+			if (!char_check(map->content[i][j], map, i, j))
 				return (0);
 			j++;
 		}
@@ -125,8 +125,6 @@ int	read_maps(t_map *map)
 	map->height = 0;
 	while (1)
 	{
-		/* if (line)
-			free(line) */;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
@@ -134,38 +132,13 @@ int	read_maps(t_map *map)
 			return (0);
 		map->height++;
 		map->width = ft_strlen(line);
+		free(line);
 	}
 	close(fd);
-	if (!file_to_map(map))
+	if (!file_to_map(map) || !is_valid(map) || !check_path(map))
+	{
+		free_map(map, map->height - 1);
 		return (0);
-	if (!is_valid(map))
-		return (0);
-	 if (!check_path(map))
-		return (0);
+	}
 	return (1);
 }
-	/* int		fd;
-	char	*line;
-
-	fd = open(map->path, O_RDONLY);
-	if (!fd)
-		return (0);
-	map->height = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (!check_line_char(line))
-			return (0);
-		map->height++;
-		map->width = ft_strlen(line);
-	}
-	close(fd);
-	if (!file_to_map(map))
-		return (0);
-	if (!is_valid(map))
-		return (0);
-	 if (!check_path(map))
-		return (0);
-	return (1); */

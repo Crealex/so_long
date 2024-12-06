@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:15:54 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 19:48:53 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:41:35 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	update_animation(t_data *data)
 {
-	int i;
-	t_enemy *current;
+	int		i;
+	t_enemy	*current;
 
 	i = 0;
 	if (!data || !data->enemies || !data->enemies->enemies)
@@ -39,7 +39,7 @@ int	update_animation(t_data *data)
 	return (0);
 }
 
-void init_sprites_path(char *sprites_path[])
+void	init_sprites_path(char *sprites_path[])
 {
 	sprites_path[0] = "./assets/32px/smogo/frame_1.xpm";
 	sprites_path[1] = "./assets/32px/smogo/frame_2.xpm";
@@ -55,78 +55,58 @@ void init_sprites_path(char *sprites_path[])
 
 void	init_enemy(t_data *data, t_enemy *enemy, int x, int y)
 {
-	int i;
-	int width;
-	int height;
-	char *sprites_path[10];
+	int		i;
+	int		width;
+	int		height;
+	char	*sprites_path[10];
 
 	init_sprites_path(sprites_path);
 	enemy->x = x;
 	enemy->y = y;
 	enemy->current_frame = 0;
 	enemy->frame_count = 10;
-	enemy->frame_delay = 3000;
+	enemy->frame_delay = 5000;
 	enemy->frame_timer = 0;
 	i = 0;
 	while (i < enemy->frame_count)
 	{
 		enemy->sprites[i] = mlx_xpm_file_to_image(data->mlx,
-			sprites_path[i], &width, &height);
+				sprites_path[i], &width, &height);
 		if (!enemy->sprites[i])
 		{
-			ft_printf("erreur du sprite");
 			return ;
 		}
 		i++;
 	}
 }
 
-void free_enemies(t_data *data)
+static int	init_enemies_structure(t_data *data)
 {
-	int i;
-	int j;
-
+	data->enemies = ft_calloc(sizeof(t_enemies), 1);
 	if (!data->enemies)
+		return (0);
+	data->enemies->capacity = 50;
+	data->enemies->count = 0;
+	data->enemies->enemies = ft_calloc(sizeof(t_enemy *),
+			data->enemies->capacity);
+	if (!data->enemies->enemies)
+	{
+		free(data->enemies);
+		data->enemies = NULL;
+		return (0);
+	}
+	return (1);
+}
+
+void	draw_enemy(t_data *data, int x, int y)
+{
+	t_enemy	*new_enemy;
+
+	if (!data->enemies && !init_enemies_structure(data))
 		return ;
-
-	i = 0;
-	while (i < data->enemies->count)
-	{
-		j = 0;
-		while (j < data->enemies->enemies[i]->frame_count)
-		{
-			if (data->enemies->enemies[i]->sprites[j])
-				mlx_destroy_image(data->mlx, data->enemies->enemies[i]->sprites[j]);
-			j++;
-		}
-		free(data->enemies->enemies[i]);
-		i++;
-	}
-	free(data->enemies->enemies);
-	free(data->enemies);
-	data->enemies = NULL;
-}
-
-	void draw_enemy(t_data *data, int x, int y)
-{
-	if (!data->enemies)
-	{
-		data->enemies = malloc(sizeof(t_enemies));
-		if (!data->enemies)
-			return ;
-		data->enemies->capacity = 50;  // Valeur arbitraire, ajustez selon besoin
-		data->enemies->count = 0;
-		data->enemies->enemies = malloc(sizeof(t_enemy *) * data->enemies->capacity);
-		if (!data->enemies->enemies)
-		{
-			free(data->enemies);
-			data->enemies = NULL;
-			return ;
-		}
-	}
 	if (data->enemies->count >= data->enemies->capacity)
-		return ;  // Gérer l'erreur selon besoins
-	t_enemy *new_enemy = malloc(sizeof(t_enemy));
+		return ;
+	new_enemy = ft_calloc(sizeof(t_enemy), 1);
 	if (!new_enemy)
 		return ;
 	init_enemy(data, new_enemy, x, y);

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:28:02 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 18:58:54 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:10:48 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	place_items(t_data *data, t_line *line)
 	{
 		if (line->line[j] == 'C')
 			mlx_put_image_to_window(data->mlx, data->window,
-			data->sprites.collect, (j * TILE_W), (line->no * TILE_H));
+				data->sprites.collect, (j * TILE_W), (line->no * TILE_H));
 		else if (line->line[j] == 'E')
-			mlx_put_image_to_window(data->mlx, data->window, data->sprites.exit_blocked,
+			mlx_put_image_to_window(data->mlx, data->window,
+				data->sprites.exit_blocked,
 				(j * TILE_W), (line->no * TILE_H));
 		else if (line->line[j] == 'P')
 			mlx_put_image_to_window(data->mlx, data->window,
@@ -43,7 +44,7 @@ int	draw_backround(t_data *data, t_line *line)
 	{
 		if (line->line[j] == '0')
 			mlx_put_image_to_window(data->mlx, data->window,
-			data->sprites.ground, (j * TILE_W), (line->no * TILE_H));
+				data->sprites.ground, (j * TILE_W), (line->no * TILE_H));
 		else if (line->line[j] == '1')
 			mlx_put_image_to_window(data->mlx, data->window, data->sprites.wall,
 				(j * TILE_W), (line->no * TILE_H));
@@ -54,26 +55,23 @@ int	draw_backround(t_data *data, t_line *line)
 
 int	init_sprites(t_data *data)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
-	// On charge chaque image une seule fois
 	data->sprites.wall = mlx_xpm_file_to_image(data->mlx,
-		"./assets/32px/wall32.xpm", &width, &height);
+			"./assets/32px/wall32.xpm", &width, &height);
 	data->sprites.ground = mlx_xpm_file_to_image(data->mlx,
-		"./assets/32px/grass32.xpm", &width, &height);
+			"./assets/32px/grass32.xpm", &width, &height);
 	data->sprites.player_r = mlx_xpm_file_to_image(data->mlx,
-		"./assets/32px/evoli_r.xpm", &width, &height);
+			"./assets/32px/evoli_r.xpm", &width, &height);
 	data->sprites.player_l = mlx_xpm_file_to_image(data->mlx,
-		"./assets/32px/evoli_l.xpm", &width, &height);
+			"./assets/32px/evoli_l.xpm", &width, &height);
 	data->sprites.collect = mlx_xpm_file_to_image(data->mlx,
-		"./assets/32px/collect32.xpm", &width, &height);
+			"./assets/32px/collect32.xpm", &width, &height);
 	data->sprites.exit = mlx_xpm_file_to_image(data->mlx,
-		"./assets/32px/exit32.xpm", &width, &height);
+			"./assets/32px/exit32.xpm", &width, &height);
 	data->sprites.exit_blocked = mlx_xpm_file_to_image(data->mlx,
-		"./assets/32px/blocked_out32.xpm", &width, &height);
-
-    // Vérification que toutes les images sont bien chargées
+			"./assets/32px/blocked_out32.xpm", &width, &height);
 	if (!data->sprites.wall || !data->sprites.ground || !data->sprites.player_r
 		|| !data->sprites.collect || !data->sprites.exit
 		|| !data->sprites.exit_blocked || !data->sprites.player_l)

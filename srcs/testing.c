@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:05:48 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/04 14:30:44 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:12:02 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	just_testing(t_map	*map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < map->height)

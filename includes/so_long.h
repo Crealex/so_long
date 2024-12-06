@@ -6,10 +6,9 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:36:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 21:17:12 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:25:31 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
@@ -50,21 +49,20 @@ typedef struct s_enemy {
 	int		y;
 }				t_enemy;
 
-typedef struct s_enemies
-{
-	t_enemy **enemies;
-	int count;
-	int capacity;
+typedef struct s_enemies {
+	t_enemy	**enemies;
+	int		count;
+	int		capacity;
 }				t_enemies;
 
-typedef struct	s_data {
-	void	*mlx;
-	void	*window;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+typedef struct s_data {
+	void		*mlx;
+	void		*window;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 	t_sprites	sprites;
 	t_enemies	*enemies;
 }				t_data;
@@ -103,44 +101,39 @@ typedef struct s_game {
 }				t_game;
 
 //hook
-int close_window(t_data *data);
-int mouse_press(int button, int x, int y, t_data *data);
-int mouse_move(int x, int y, t_data *data);
-int key_press(int keycode, t_data *data);
-int	close_key_press(int keycode, t_data *data);
-// experience
-int img_move(int x, int y, t_data *data);
-//ground_creator
-void	ground_creator(t_data *data);
-//wall_creator
-void	wall_creator(t_data *data);
+int		close_window(t_data *data);
+int		close_key_press(int keycode, t_data *data);
 //read map
-int	read_maps(t_map *map);
+int		read_maps(t_map *map);
 //check path
-int	check_path(t_map *map);
+int		check_path(t_map *map);
 // so_long_utils
-int	len_line(char *line);
+int		len_line(char *line);
 void	free_map(t_map *map, int i);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	free_enemies(t_data *data);
 //testing.c
 void	just_testing(t_map	*map);
 //create_map
-int	draw_map(t_map *map, t_data *data);
-int	draw_backround(t_data *data, t_line *line);
+int		draw_map(t_map *map, t_data *data);
+int		draw_backround(t_data *data, t_line *line);
 void	place_items(t_data *data, t_line *line);
 //draw lvl2
 void	goto_lvl_two(t_game *game);
 void	cleanup_level(t_game *game);
 //Move perso
-int	move(int keycode, t_game *game);
+int		move(int keycode, t_game *game);
+void	redraw_map(t_game *game, int new_x, int new_y, int keycode);
+void	check_move(t_game *game, int new_y, int new_x, int keycode);
+//draw_counter.c
+void	draw_counter(t_game *game, int count);
 // finish display
 void	finish_display(t_game *game);
 void	gameover_display(t_game *game);
 // custom path
 void	custom_path(char *path);
 // enemy
-int	update_animation(t_data *data);
+int		update_animation(t_data *data);
 void	draw_enemy(t_data *data, int y, int x);
-void free_enemies(t_data *data);
 
 #endif

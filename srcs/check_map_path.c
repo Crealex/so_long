@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:58:01 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/05 19:10:43 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:38:47 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 t_map	*map_copy(t_map *map)
 {
-	t_map *map_cpy;
-	int i;
+	t_map	*map_cpy;
+	int		i;
 
-	map_cpy = malloc(sizeof(t_map) * 1);
-	ft_printf("test\n");
+	map_cpy = ft_calloc(sizeof(t_map), 1);
 	if (!map_cpy)
 		return (NULL);
-	map_cpy->content = malloc(sizeof(char *) * (map->height + 1));
+	map_cpy->content = ft_calloc(sizeof(char *), (map->height + 1));
 	if (!map_cpy->content)
 		return (free(map_cpy), NULL);
 	i = 0;
-	ft_printf("hauteur de la map : %d\n", map->height);
 	while (i < map->height)
 	{
 		map_cpy->content[i] = ft_strdup(map->content[i]);
@@ -50,8 +48,8 @@ int	flood_fill(t_map *map, int x, int y)
 		map->content[y][x] = 'V';
 		map->count_out--;
 	}
-	if  (map->content[y][x] == '1' || map->content[y][x] == 'V' || map->content[y][x] == 'E'
-			||map->content[y][x] == 'X')
+	if (map->content[y][x] == '1' || map->content[y][x] == 'V'
+			|| map->content[y][x] == 'E' || map->content[y][x] == 'X')
 		return (0);
 	if (map->content[y][x] == 'C')
 		map->collectibles--;
@@ -67,18 +65,14 @@ int	flood_fill(t_map *map, int x, int y)
 
 int	check_path(t_map *map)
 {
-	//int i;
-	//int j;
 	t_map	*map_cpy;
 
-	//i = 0;
-	//j = 0;
 	map_cpy = map_copy(map);
 	if (!map_cpy)
 		return (0);
 	if (!flood_fill(map_cpy, map_cpy->player_x, map_cpy->player_y))
 	{
-		ft_printf("chemin inaccessible !\n");
+		free_map(map_cpy, map_cpy->height - 1);
 		return (0);
 	}
 	free_map(map_cpy, map_cpy->height - 1);
